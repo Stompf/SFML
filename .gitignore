@@ -86,6 +86,6 @@ Debug/vc141.idb
 *.db
 *.opendb
 v15/
-/SFML/build
+SFML/
 Debug/
 Box2D/
