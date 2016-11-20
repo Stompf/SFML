@@ -1,14 +1,10 @@
 #include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
 
 #include "game.hpp"
 
 game::game(sf::RenderWindow *window)
 {
 	_pWindow = window;
-
-	b2Vec2 gravity(0.0f, -10.0f);
-	b2World world(gravity);
 
 	_shape = sf::RectangleShape(sf::Vector2f(20, 20));
 	_shape.setFillColor(sf::Color::Green);
