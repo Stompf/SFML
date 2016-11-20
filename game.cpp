@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <windows.h>
+#include "resource.h" 
 
 #include "game.hpp"
 
@@ -8,6 +10,12 @@ game::game(sf::RenderWindow *window)
 
 	_shape = sf::RectangleShape(sf::Vector2f(20, 20));
 	_shape.setFillColor(sf::Color::Green);
+
+	sf::Texture texture;
+	if (!texture.loadFromFile("Top_Down_Survivor\\rifle\\idle\\survivor-idle_rifle_0.png")) 
+	{
+		throw std::runtime_error("Failed to find resource.");
+	}
 }
 
 game::~game()
@@ -52,4 +60,29 @@ void game::handleInput(sf::RectangleShape &shape, float elapsed)
 	else if (shape.getPosition().y > _pWindow->getView().getSize().y - shape.getSize().y) {
 		shape.setPosition(shape.getPosition().x, _pWindow->getView().getSize().y - shape.getSize().y);
 	}
+}
+
+sf::Image game::LoadImageFromResource(const std::string& name)
+{
+	HRSRC rsrcData = FindResource(NULL, name.c_str(), RT_RCDATA);
+	if (!rsrcData)
+		throw std::runtime_error("Failed to find resource.");
+
+	DWORD rsrcDataSize = SizeofResource(NULL, rsrcData);
+	if (rsrcDataSize <= 0)
+		throw std::runtime_error("Size of resource is 0.");
+
+	HGLOBAL grsrcData = LoadResource(NULL, rsrcData);
+	if (!grsrcData)
+		throw std::runtime_error("Failed to load resource.");
+
+	LPVOID firstByte = LockResource(grsrcData);
+	if (!firstByte)
+		throw std::runtime_error("Failed to lock resource.");
+
+	sf::Image image;
+	if (!image.loadFromMemory(firstByte, rsrcDataSize))
+		throw std::runtime_error("Failed to load image from memory.");
+
+	return image;
 }

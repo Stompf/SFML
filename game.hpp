@@ -14,5 +14,6 @@ private:
 	sf::RectangleShape _shape;
 
 	void handleInput(sf::RectangleShape &shape, float elapsed);
+	sf::Image LoadImageFromResource(const std::string& name);
 };
 

@@ -121,10 +121,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="game.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SFML.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Top_Down_Survivor\rifle\idle\survivor-idle_rifle_0.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
