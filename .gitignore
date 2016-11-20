@@ -3,6 +3,8 @@
 *.lo
 *.o
 *.obj
+*.user
+*.tmp
 
 # Precompiled Headers
 *.gch
@@ -82,3 +84,11 @@ Debug/SFML.tlog/CL.command.1.tlog
 *.tlog
 *.pdb
 Debug/vc140.idb
+Debug/vc141.idb
+*.db
+*.opendb
+v15/
+Debug/
+*.vcxproj.filters
+.vs/
+ipch/
