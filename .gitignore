@@ -13,7 +13,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -22,7 +21,6 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -80,11 +78,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 *.log
-Debug/SFML.tlog/CL.command.1.tlog
 *.tlog
 *.pdb
-Debug/vc140.idb
-Debug/vc141.idb
 *.db
 *.opendb
 v15/
