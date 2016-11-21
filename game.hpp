@@ -1,4 +1,6 @@
 #pragma once
+#include "animatedTexture.h"
+
 class game
 {
 public:
@@ -8,12 +10,13 @@ public:
 	void update(float elapsed);
 	
 private:
-	const float _speed = 500;
+	const float _speed = 200;
+	animatedTexture *_animation;
 
 	sf::RenderWindow *_pWindow;
 	sf::RectangleShape _shape;
+	sf::Texture _texture;
 
 	void handleInput(sf::RectangleShape &shape, float elapsed);
-	sf::Image LoadImageFromResource(const std::string& name);
 };
 

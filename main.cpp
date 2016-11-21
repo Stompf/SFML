@@ -3,7 +3,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1500, 750), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1500, 750), "LunneGame");
 	sf::Clock clock;
 	game game(&window);
 
@@ -38,7 +38,7 @@ int main()
 			return EXIT_SUCCESS;
 		}
 
-		window.clear();
+		window.clear(sf::Color::White);
 
 		sf::Time elapsed = clock.restart();
 		game.update(elapsed.asSeconds());

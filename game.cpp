@@ -1,21 +1,25 @@
 #include <SFML/Graphics.hpp>
 #include <windows.h>
 #include "resource.h" 
-
 #include "game.hpp"
+
+#include "animatedTexture.h"
+
 
 game::game(sf::RenderWindow *window)
 {
 	_pWindow = window;
 
-	_shape = sf::RectangleShape(sf::Vector2f(20, 20));
-	_shape.setFillColor(sf::Color::Green);
+	_shape = sf::RectangleShape(sf::Vector2f(140, 100));
 
-	sf::Texture texture;
-	if (!texture.loadFromFile("Top_Down_Survivor\\rifle\\idle\\survivor-idle_rifle_0.png")) 
-	{
-		throw std::runtime_error("Failed to find resource.");
-	}
+	
+	
+	
+	_animation = new animatedTexture();
+	_animation->loadAnimatedTexture("Top_Down_Survivor\\rifle\\idle\\idle.png", "Top_Down_Survivor\\rifle\\idle\\idle.txt");
+	//_animation->loadAnimatedTexture("Top_Down_Survivor\\rifle\\meleeattack\\meleeattack.png", "Top_Down_Survivor\\rifle\\meleeattack\\meleeattack.txt");
+	_texture = _animation->GetTexture();
+	_shape.setTexture(&_texture);
 }
 
 game::~game()
@@ -25,6 +29,13 @@ game::~game()
 void game::update(float elapsed)
 {
 	handleInput(_shape, elapsed);
+	
+
+	if (_animation->UpdateAnimation(elapsed)) 
+	{
+		_shape.setTextureRect(_animation->StepAnimation());
+	}
+
 	_pWindow->draw(_shape);
 }
 
@@ -60,29 +71,4 @@ void game::handleInput(sf::RectangleShape &shape, float elapsed)
 	else if (shape.getPosition().y > _pWindow->getView().getSize().y - shape.getSize().y) {
 		shape.setPosition(shape.getPosition().x, _pWindow->getView().getSize().y - shape.getSize().y);
 	}
-}
-
-sf::Image game::LoadImageFromResource(const std::string& name)
-{
-	HRSRC rsrcData = FindResource(NULL, name.c_str(), RT_RCDATA);
-	if (!rsrcData)
-		throw std::runtime_error("Failed to find resource.");
-
-	DWORD rsrcDataSize = SizeofResource(NULL, rsrcData);
-	if (rsrcDataSize <= 0)
-		throw std::runtime_error("Size of resource is 0.");
-
-	HGLOBAL grsrcData = LoadResource(NULL, rsrcData);
-	if (!grsrcData)
-		throw std::runtime_error("Failed to load resource.");
-
-	LPVOID firstByte = LockResource(grsrcData);
-	if (!firstByte)
-		throw std::runtime_error("Failed to lock resource.");
-
-	sf::Image image;
-	if (!image.loadFromMemory(firstByte, rsrcDataSize))
-		throw std::runtime_error("Failed to load image from memory.");
-
-	return image;
 }

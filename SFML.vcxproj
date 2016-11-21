@@ -126,12 +126,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="animatedTexture.h" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="animatedTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="textureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SFML.rc" />
