@@ -10,7 +10,7 @@ game::game(sf::RenderWindow *window)
 {
 	_pWindow = window;
 
-	_shape = sf::RectangleShape(sf::Vector2f(140, 100));
+	_shape = sf::RectangleShape(sf::Vector2f(70, 50));
 
 	
 	
@@ -28,14 +28,16 @@ game::~game()
 
 void game::update(float elapsed)
 {
-	handleInput(_shape, elapsed);
-	
+	handleInput(_shape, elapsed);	
 
 	if (_animation->UpdateAnimation(elapsed)) 
 	{
 		_shape.setTextureRect(_animation->StepAnimation());
 	}
+}
 
+void game::draw()
+{
 	_pWindow->draw(_shape);
 }
 

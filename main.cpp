@@ -38,11 +38,13 @@ int main()
 			return EXIT_SUCCESS;
 		}
 
+		game.update(clock.getElapsedTime().asSeconds());
+
 		window.clear(sf::Color::White);
+		
+		game.draw();
 
-		sf::Time elapsed = clock.restart();
-		game.update(elapsed.asSeconds());
-
+		clock.restart().asSeconds();
 		window.display();
 	}
 

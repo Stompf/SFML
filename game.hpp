@@ -8,9 +8,10 @@ public:
 	~game();
 
 	void update(float elapsed);
-	
+	void draw();
+
 private:
-	const float _speed = 200;
+	const float _speed = 100;
 	animatedTexture *_animation;
 
 	sf::RenderWindow *_pWindow;
