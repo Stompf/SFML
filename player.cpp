@@ -5,6 +5,10 @@
 
 player::player()
 {
+	_feetShape = sf::RectangleShape(sf::Vector2f(30, 20));
+	_feetShape.setOrigin(_feetShape.getSize().x / 2, _feetShape.getSize().y / 2);
+	_playerAnimationManager.setWalkingAnimation(false, _feetShape);
+
 	_shape = sf::RectangleShape(sf::Vector2f(70, 50));
 	_shape.setOrigin(_shape.getSize().x / 2, _shape.getSize().y / 2);
 	_shape.setPosition(30, 30);
@@ -22,11 +26,12 @@ void player::update(const float deltaTime, sf::RenderWindow &window)
 	sf::Vector2f oldPosition = _shape.getPosition();
 	handleInput(deltaTime, window);
 	handleAnimation(oldPosition);
-	_playerAnimationManager.update(deltaTime, _shape);
+	_playerAnimationManager.update(deltaTime, _shape, _feetShape);
 }
 
 void player::draw(sf::RenderWindow &window)
 {
+	window.draw(_feetShape);
 	window.draw(_shape);
 }
 
@@ -71,10 +76,21 @@ void player::handleInput(float elapsed, sf::RenderWindow &window)
 	else if (_shape.getPosition().y > window.getView().getSize().y - _shape.getSize().y) {
 		_shape.setPosition(_shape.getPosition().x, window.getView().getSize().y - _shape.getSize().y);
 	}
+
+	_feetShape.setPosition(_shape.getPosition());
+	_feetShape.setRotation(_shape.getRotation());
 }
 
 void player::handleAnimation(sf::Vector2f oldPosition)
 {
+	bool moving = oldPosition.x != _shape.getPosition().x || oldPosition.y != _shape.getPosition().y;
+
+	if (moving != _isMoving)
+	{
+		_playerAnimationManager.setWalkingAnimation(moving, _feetShape);
+		_isMoving = moving;
+	}
+
 	_shape.setScale(1, 1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -92,7 +108,6 @@ void player::handleAnimation(sf::Vector2f oldPosition)
 	}
 	else
 	{
-		bool moving = oldPosition.x != _shape.getPosition().x || oldPosition.y != _shape.getPosition().y;
 		if (moving)
 		{
 			_playerAnimationManager.setCurrentAnimation(playerAnimationManager::Animations::move, _shape);
@@ -102,4 +117,6 @@ void player::handleAnimation(sf::Vector2f oldPosition)
 			_playerAnimationManager.setCurrentAnimation(playerAnimationManager::Animations::idle, _shape);
 		}
 	}
+
+
 }

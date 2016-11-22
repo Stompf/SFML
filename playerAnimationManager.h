@@ -11,13 +11,19 @@ public:
 
 	enum class Animations { idle, meleeattack, move, reload, shoot };
 
-	void update(const float deltaTime, sf::RectangleShape &shape);
+	void update(const float deltaTime, sf::RectangleShape &shape, sf::RectangleShape &feetShape);
 	void setCurrentAnimation(const Animations animation, sf::RectangleShape &shape);
 	Animations getCurrentAnimation();
+	void setWalkingAnimation(bool isWalking, sf::RectangleShape &walkingShape);
 
 private:
+	enum class WalkingAnimations { idle, walk, run, strafe_left, strafe_right };
+
 	Animations _currentAnimation;
 	animatedTexture  _currentAnimationTexture;
+	WalkingAnimations _currentWalkingAnimation;
+	animatedTexture  _currentWalkingAnimationTexture;
 	std::map<Animations, animatedTexture> _animations;
+	std::map<WalkingAnimations, animatedTexture> _walkingAnimations;
 };
 
