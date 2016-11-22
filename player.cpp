@@ -6,6 +6,8 @@
 player::player()
 {
 	_shape = sf::RectangleShape(sf::Vector2f(70, 50));
+	_shape.setOrigin(_shape.getSize().x / 2, _shape.getSize().y / 2);
+	_shape.setPosition(30, 30);
 
 	_playerAnimationManager = playerAnimationManager();
 	_playerAnimationManager.setCurrentAnimation(playerAnimationManager::Animations::idle, _shape);
@@ -52,11 +54,11 @@ void player::handleInput(sf::RectangleShape &shape, float elapsed, sf::RenderWin
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
 	{
-		_shape.rotate(_rotationSpeed);
+		_shape.rotate(-_rotationSpeed);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		_shape.rotate(-_rotationSpeed);
+		_shape.rotate(_rotationSpeed);
 	}
 
 	if(moving && _playerAnimationManager.getCurrentAnimation() == playerAnimationManager::Animations::idle)

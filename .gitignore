@@ -83,6 +83,7 @@ $RECYCLE.BIN/
 *.opendb
 v15/
 Debug/
+Release/
 *.vcxproj.filters
 .vs/
 ipch/
