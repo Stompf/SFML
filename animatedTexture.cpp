@@ -4,9 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "animatedTexture.h"
 
-animatedTexture::animatedTexture(const std::string &pngFile, const std::string &dimensionFile, const float animationSpeed)
+animatedTexture::animatedTexture(const std::string &pngFile, const float animationSpeed)
 {
-	loadAnimatedTexture(pngFile, dimensionFile);
+	loadAnimatedTexture(pngFile);
 	AnimationSpeed = animationSpeed;
 }
 
@@ -54,13 +54,16 @@ sf::Texture& animatedTexture::GetTexture()
 	return _texture;
 }
 
-void animatedTexture::loadAnimatedTexture(const std::string &pngFile, const std::string &dimensionFile)
+void animatedTexture::loadAnimatedTexture(const std::string &pngFile)
 {
 	if (!_texture.loadFromFile(pngFile))
 	{
 		throw std::runtime_error("Failed to find resource: " + pngFile);
 	}
-	readAnimationDimensionFile(dimensionFile);
+
+	std::string txtFile = pngFile;
+	replaceAll(txtFile, ".png", ".txt");
+	readAnimationDimensionFile(txtFile);
 }
 
 
@@ -99,4 +102,14 @@ bool animatedTexture::isInteger(const std::string & s)
 	strtol(s.c_str(), &p, 10);
 
 	return (*p == 0);
+}
+
+void animatedTexture::replaceAll(std::string& str, const std::string& from, const std::string& to) {
+	if (from.empty())
+		return;
+	size_t start_pos = 0;
+	while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
+		str.replace(start_pos, from.length(), to);
+		start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+	}
 }

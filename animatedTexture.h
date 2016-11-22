@@ -2,7 +2,7 @@
 class animatedTexture
 {
 public:
-	animatedTexture(const std::string &pngFile, const std::string &dimensionFile, const float animationSpeed = 0.10F);
+	animatedTexture(const std::string &pngFile, const float animationSpeed = 0.10F);
 	animatedTexture();
 	~animatedTexture();
 
@@ -26,8 +26,10 @@ private:
 	float _currentElapsed = 0;
 	float AnimationSpeed;
 
-	void loadAnimatedTexture(const std::string &pngFile, const std::string &dimensionFile);
+	void loadAnimatedTexture(const std::string &pngFile);
 	void readAnimationDimensionFile(const std::string &dimensionFile);
+	
 	bool isInteger(const std::string &s);
+	void animatedTexture::replaceAll(std::string& str, const std::string& from, const std::string& to);
 };
 
