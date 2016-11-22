@@ -16,6 +16,7 @@ private:
 	playerAnimationManager _playerAnimationManager;
 	sf::RectangleShape _shape;
 
-	void handleInput(sf::RectangleShape &shape, float elapsed, sf::RenderWindow &window);
+	void handleInput(float elapsed, sf::RenderWindow &window);
+	void handleAnimation(sf::Vector2f oldPosition);
 };
 

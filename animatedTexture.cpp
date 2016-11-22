@@ -4,9 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include "animatedTexture.h"
 
-animatedTexture::animatedTexture(const std::string &pngFile, const std::string &dimensionFile)
+animatedTexture::animatedTexture(const std::string &pngFile, const std::string &dimensionFile, const float animationSpeed)
 {
 	loadAnimatedTexture(pngFile, dimensionFile);
+	AnimationSpeed = animationSpeed;
 }
 
 animatedTexture::animatedTexture()

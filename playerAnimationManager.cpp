@@ -11,7 +11,7 @@ playerAnimationManager::playerAnimationManager()
 	_animations[Animations::meleeattack] = animatedTexture("Top_Down_Survivor\\rifle\\meleeattack\\meleeattack.png", "Top_Down_Survivor\\rifle\\meleeattack\\meleeattack.txt");
 	_animations[Animations::move] = animatedTexture("Top_Down_Survivor\\rifle\\move\\move.png", "Top_Down_Survivor\\rifle\\move\\move.txt");
 	_animations[Animations::reload] = animatedTexture("Top_Down_Survivor\\rifle\\reload\\reload.png", "Top_Down_Survivor\\rifle\\reload\\reload.txt");
-	_animations[Animations::shoot] = animatedTexture("Top_Down_Survivor\\rifle\\shoot\\shoot.png", "Top_Down_Survivor\\rifle\\shoot\\shoot.txt");
+	_animations[Animations::shoot] = animatedTexture("Top_Down_Survivor\\rifle\\shoot\\shoot.png", "Top_Down_Survivor\\rifle\\shoot\\shoot.txt", 0.05F);
 
 	_currentAnimationTexture = _animations[Animations::idle];
 }
@@ -30,6 +30,11 @@ void playerAnimationManager::update(const float deltaTime, sf::RectangleShape &s
 
 void playerAnimationManager::setCurrentAnimation(const Animations animation, sf::RectangleShape &shape)
 {
+	if (animation == _currentAnimation)
+	{
+		return;
+	}
+
 	_currentAnimationTexture = _animations[animation];
 	_currentAnimation = animation;
 	shape.setTexture(&_currentAnimationTexture.GetTexture());
