@@ -128,7 +128,9 @@
   <ItemGroup>
     <ClInclude Include="animatedTexture.h" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="playerAnimationManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
@@ -137,13 +139,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerAnimationManager.cpp" />
     <ClCompile Include="textureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SFML.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Top_Down_Survivor\rifle\idle\survivor-idle_rifle_0.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

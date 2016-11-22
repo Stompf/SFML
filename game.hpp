@@ -1,23 +1,17 @@
 #pragma once
-#include "animatedTexture.h"
+
+#include "player.h"
 
 class game
 {
 public:
-	game(sf::RenderWindow *window);
+	game();
 	~game();
 
-	void update(float elapsed);
-	void draw();
+	void update(float elapsed, sf::RenderWindow &window);
+	void draw(sf::RenderWindow &window);
 
 private:
-	const float _speed = 100;
-	animatedTexture *_animation;
-
-	sf::RenderWindow *_pWindow;
-	sf::RectangleShape _shape;
-	sf::Texture _texture;
-
-	void handleInput(sf::RectangleShape &shape, float elapsed);
+	player _player;
 };
 

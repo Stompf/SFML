@@ -2,15 +2,16 @@
 class animatedTexture
 {
 public:
+	animatedTexture(const std::string &pngFile, const std::string &dimensionFile);
 	animatedTexture();
 	~animatedTexture();
-	
-	void loadAnimatedTexture(const std::string &pngFile, const std::string &dimensionFile);
+
 	bool UpdateAnimation(const float elapsed);
+	sf::IntRect ResetAnimation();
 	sf::IntRect StepAnimation();
 
-	double AnimationSpeed = 0.1;
-	sf::Texture GetTexture();
+	double AnimationSpeed = 0.05;
+	sf::Texture& GetTexture();
 
 private:
 	struct AnimationBbox
@@ -26,6 +27,7 @@ private:
 	int _currentAnimation = 0;
 	float _currentElapsed = 0;
 
+	void loadAnimatedTexture(const std::string &pngFile, const std::string &dimensionFile);
 	void readAnimationDimensionFile(const std::string &dimensionFile);
 	bool isInteger(const std::string &s);
 };

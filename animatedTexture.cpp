@@ -4,7 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include "animatedTexture.h"
 
-
+animatedTexture::animatedTexture(const std::string &pngFile, const std::string &dimensionFile)
+{
+	loadAnimatedTexture(pngFile, dimensionFile);
+}
 
 animatedTexture::animatedTexture()
 {
@@ -13,15 +16,6 @@ animatedTexture::animatedTexture()
 
 animatedTexture::~animatedTexture()
 {
-}
-
-void animatedTexture::loadAnimatedTexture(const std::string &pngFile, const std::string &dimensionFile)
-{
-	if (!_texture.loadFromFile(pngFile))
-	{
-		throw std::runtime_error("Failed to find resource: " + pngFile);
-	}
-	readAnimationDimensionFile(dimensionFile);
 }
 
 bool animatedTexture::UpdateAnimation(const float elapsed)
@@ -34,11 +28,19 @@ bool animatedTexture::UpdateAnimation(const float elapsed)
 	return false;
 }
 
+sf::IntRect animatedTexture::ResetAnimation()
+{
+	_currentAnimation = 0;
+	_currentElapsed = 0;
+	AnimationBbox bbox = _animations[_currentAnimation];
+	return sf::IntRect(bbox.x, bbox.y, bbox.width, bbox.height);
+}
+
 sf::IntRect animatedTexture::StepAnimation()
 {
 	_currentAnimation++;
 
-	if (_currentAnimation >= _animations.size())
+	if ((unsigned)_currentAnimation >= _animations.size())
 	{
 		_currentAnimation = 0;
 	}
@@ -46,10 +48,20 @@ sf::IntRect animatedTexture::StepAnimation()
 	return sf::IntRect(bbox.x, bbox.y, bbox.width, bbox.height);
 }
 
-sf::Texture animatedTexture::GetTexture()
+sf::Texture& animatedTexture::GetTexture()
 {
 	return _texture;
 }
+
+void animatedTexture::loadAnimatedTexture(const std::string &pngFile, const std::string &dimensionFile)
+{
+	if (!_texture.loadFromFile(pngFile))
+	{
+		throw std::runtime_error("Failed to find resource: " + pngFile);
+	}
+	readAnimationDimensionFile(dimensionFile);
+}
+
 
 void animatedTexture::readAnimationDimensionFile(const std::string &dimensionFile)
 {

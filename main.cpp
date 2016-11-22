@@ -5,14 +5,17 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1500, 750), "LunneGame");
 	sf::Clock clock;
-	game game(&window);
+	game game;
 
 	bool isWindowFocused = true;
 
 	window.setFramerateLimit(60);
+	window.setMouseCursorGrabbed(true);
+	window.setMouseCursorVisible(false);
 
 	while (window.isOpen())
 	{
+		sf::Time deltaTime = clock.restart();
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -37,14 +40,12 @@ int main()
 			window.close();
 			return EXIT_SUCCESS;
 		}
-
-		game.update(clock.getElapsedTime().asSeconds());
+		
+		game.update(deltaTime.asSeconds(), window);
 
 		window.clear(sf::Color::White);
 		
-		game.draw();
-
-		clock.restart().asSeconds();
+		game.draw(window);
 		window.display();
 	}
 
