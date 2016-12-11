@@ -5,11 +5,11 @@
 
 player::player()
 {
-	_feetShape = sf::RectangleShape(sf::Vector2f(30, 20));
+	_feetShape = sf::RectangleShape(sf::Vector2f(_playerSizeX * 0.4, _playerSizeX * 0.3));
 	_feetShape.setOrigin(_feetShape.getSize().x / 2, _feetShape.getSize().y / 2);
 	_playerAnimationManager.setWalkingAnimation(false, _feetShape);
 
-	_shape = sf::RectangleShape(sf::Vector2f(70, 50));
+	_shape = sf::RectangleShape(sf::Vector2f(_playerSizeX, _playerSizeX * 0.7));
 	_shape.setOrigin(_shape.getSize().x / 2, _shape.getSize().y / 2);
 	_shape.setPosition(30, 30);
 

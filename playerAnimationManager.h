@@ -23,7 +23,8 @@ private:
 	animatedTexture  _currentAnimationTexture;
 	WalkingAnimations _currentWalkingAnimation;
 	animatedTexture  _currentWalkingAnimationTexture;
-	std::map<Animations, animatedTexture> _animations;
+	std::map<Animations, animatedTexture> _animationsRifle;
+	std::map<Animations, animatedTexture> _animationsHandgun;
 	std::map<WalkingAnimations, animatedTexture> _walkingAnimations;
 };
 
